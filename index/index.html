@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Boutique</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:      #2c5f8a;
+  --blue-dark: #1e4165;
+  --blue-mid:  #3a7ab5;
+  --blue-light:#e8f1f8;
+  --orange:    #e8742a;
+  --white:     #ffffff;
+  --gray-bg:   #f5f6f8;
+  --gray-light:#eaecef;
+  --gray-mid:  #c0c5cc;
+  --gray-text: #6b7280;
+  --dark:      #2a2f3a;
+  --border:    #dde2e8;
+  --text:      #333b48;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--gray-bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--blue-dark);
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  padding: 7px 0;
+}
+.topbar-inner {
+  max-width: 1180px; margin: 0 auto; padding: 0 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.topbar a { color: rgba(255,255,255,0.7); text-decoration: none; }
+.topbar-right { display: flex; gap: 20px; align-items: center; }
+.topbar-right span { display: flex; align-items: center; gap: 5px; }
+
+/* ── HEADER ── */
+header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 1180px; margin: 0 auto; padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between; height: 68px;
+}
+.logo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 26px; font-weight: 700;
+  color: var(--blue-dark); letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-dot { color: var(--orange); }
+nav { display: flex; height: 68px; }
+.tab-btn {
+  font-family: 'Raleway', sans-serif;
+  background: none; border: none;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--gray-text);
+  padding: 0 20px; height: 68px; cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--blue); }
+.tab-btn.active { color: var(--blue); border-bottom-color: var(--orange); }
+
+/* ── HERO BANNER ── */
+.hero {
+  background: linear-gradient(100deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-mid) 100%);
+  padding: 56px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before, .hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.07;
+  background: white;
+}
+.hero::before { width: 500px; height: 500px; top: -200px; left: -100px; }
+.hero::after  { width: 300px; height: 300px; bottom: -120px; right: -60px; }
+
+.hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 14px; border-radius: 2px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 36px; font-weight: 700;
+  color: white; line-height: 1.15; margin-bottom: 12px;
+}
+.hero p { color: rgba(255,255,255,0.75); font-size: 15px; font-weight: 300; }
+
+/* ── CONTAINER ── */
+.container { max-width: 1180px; margin: 0 auto; padding: 40px 20px; }
+.view { display: none; }
+.view.active { display: block; }
+
+/* ── SECTION HEAD ── */
+.section-head {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 30px;
+}
+.section-head h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--blue-dark);
+  white-space: nowrap;
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
+.section-badge {
+  background: var(--orange); color: white;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 10px; border-radius: 2px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ── STATS ── */
+.stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 36px;
+}
+.stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--blue);
+  border-radius: 3px;
+  padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.stat-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.stat-val {
+  font-family: 'Raleway', sans-serif;
+  font-size: 26px; font-weight: 700;
+  color: var(--blue-dark); line-height: 1;
+}
+.stat-label { font-size: 11px; font-weight: 600; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 3px; }
+
+/* ── TOOLBAR ── */
+.toolbar {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  align-items: center; margin-bottom: 24px;
+}
+.search-box {
+  flex: 1; min-width: 200px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  padding: 8px 12px 8px 34px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-box input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(44,95,138,0.1); }
+.search-box::before {
+  content: '🔍'; font-size: 13px;
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+}
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--gray-text);
+  cursor: pointer; transition: all 0.15s;
+  font-family: 'Raleway', sans-serif;
+}
+.chip:hover { border-color: var(--blue); color: var(--blue); }
+.chip.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+/* ── PRODUCT GRID ── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: popIn 0.3s ease;
+}
+@keyframes popIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.09); }
+
+.prod-img {
+  width: 100%; height: 190px;
+  background: var(--gray-bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  position: relative; overflow: hidden;
+}
+.prod-img img { width:100%; height:100%; object-fit: cover; }
+.prod-img-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px; background: var(--orange);
+}
+
+.prod-body { padding: 16px 18px 18px; }
+.prod-cat {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue-mid); margin-bottom: 5px;
+}
+.prod-name {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--dark); margin-bottom: 6px; line-height: 1.3;
+}
+.prod-desc {
+  font-size: 12px; color: var(--gray-text); font-weight: 300;
+  line-height: 1.6; margin-bottom: 12px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.prod-footer {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-top: 1px solid var(--gray-light); padding-top: 12px;
+}
+.prod-price {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px; font-weight: 700; color: var(--blue-dark);
+}
+.prod-price small { font-size: 12px; color: var(--gray-text); font-weight: 400; font-family: 'Open Sans', sans-serif; }
+.prod-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+
+.badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
+}
+.badge-ok  { background: #e6f7ef; color: #1a7a4a; }
+.badge-low { background: #fff8e6; color: #a86d00; }
+.badge-out { background: #fde9e9; color: #c0392b; }
+
+.btn-del {
+  background: none; border: 1px solid var(--border); border-radius: 2px;
+  color: var(--gray-text); font-size: 11px; font-weight: 600;
+  font-family: 'Raleway', sans-serif; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; cursor: pointer; transition: all 0.15s;
+}
+.btn-del:hover { border-color: #e74c3c; color: #e74c3c; background: #fde9e9; }
+
+/* ── EMPTY ── */
+.empty {
+  background: white; border: 1px solid var(--border);
+  grid-column: 1/-1; text-align: center; padding: 80px 20px; border-radius: 3px;
+}
+.empty-icon { font-size: 56px; opacity: 0.3; margin-bottom: 16px; }
+.empty h3 { font-family: 'Raleway', sans-serif; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.empty p { color: var(--gray-text); font-size: 13px; margin-bottom: 20px; }
+
+/* ── FORM LAYOUT ── */
+.form-layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+.form-panel {
+  background: white; border: 1px solid var(--border); border-radius: 3px;
+  border-top: 4px solid var(--blue); padding: 32px;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1/-1; }
+label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray-text);
+}
+input[type=text], input[type=number], textarea, select {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px; padding: 9px 12px;
+  background: var(--gray-bg); border: 1px solid var(--border); border-radius: 3px;
+  color: var(--text); outline: none; width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  background: white; border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(44,95,138,0.1);
+}
+textarea { resize: vertical; min-height: 90px; }
+select { cursor: pointer; }
+
+.upload-zone {
+  border: 2px dashed var(--gray-mid); border-radius: 3px;
+  padding: 24px; text-align: center; cursor: pointer;
+  background: var(--gray-bg); transition: all 0.2s;
+}
+.upload-zone:hover { border-color: var(--blue); background: var(--blue-light); }
+.upload-zone input { display: none; }
+.upload-icon { font-size: 28px; margin-bottom: 8px; }
+.upload-zone p { font-size: 13px; color: var(--gray-text); margin-bottom: 4px; }
+.upload-zone span { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; }
+#preview-img { width: 100%; max-height: 200px; object-fit: contain; border-radius: 3px; display: none; margin-top: 12px; }
+
+.btn-primary {
+  background: var(--orange); color: white; border: none;
+  font-family: 'Raleway', sans-serif; font-weight: 700;
+  font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 13px 28px; border-radius: 3px;
+  cursor: pointer; width: 100%; margin-top: 20px;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-primary:hover { background: #c85e1e; }
+.btn-primary:active { transform: scale(0.98); }
+
+/* ── SIDEBAR ── */
+.sidebar { display: flex; flex-direction: column; gap: 16px; }
+.sidebar-card {
+  background: white; border: 1px solid var(--border); border-radius: 3px; overflow: hidden;
+}
+.sidebar-head {
+  background: var(--blue-dark); color: white;
+  font-family: 'Raleway', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 12px 18px;
+}
+.sidebar-body { padding: 16px 18px; }
+.sidebar-body ul { list-style: none; }
+.sidebar-body li {
+  font-size: 12px; color: var(--gray-text);
+  padding: 7px 0; border-bottom: 1px solid var(--gray-light);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.sidebar-body li:last-child { border-bottom: none; }
+.sidebar-body li::before { content: '✓'; color: var(--blue-mid); font-weight: 700; flex-shrink: 0; }
+
+.sidebar-highlight {
+  background: var(--blue-dark); border-radius: 3px;
+  padding: 20px 18px; text-align: center;
+}
+.sidebar-highlight p { color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 10px; }
+.sidebar-highlight strong { color: white; font-family: 'Raleway', sans-serif; font-size: 15px; font-weight: 700; display: block; margin-bottom: 12px; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--blue-dark); color: white;
+  padding: 12px 20px; border-radius: 3px;
+  font-size: 13px; font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s; z-index: 999;
+  border-left: 4px solid var(--orange);
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--blue-dark);
+  color: rgba(255,255,255,0.6);
+  text-align: center; padding: 24px 20px;
+  font-size: 12px; margin-top: 60px;
+}
+footer span { color: var(--orange); font-weight: 600; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .form-layout { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; }
+  header { padding: 0; }
+  .tab-btn { padding: 0 12px; font-size: 11px; }
+  .hero h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>📍 Algérie &nbsp;|&nbsp; ✉ contact@maboutique.dz</span>
+    <div class="topbar-right">
+      <span>📞 +213 XX XX XX XX</span>
+      <span>🕐 Lun–Sam, 08h–18h</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span>Ma</span><span class="logo-dot">Boutique</span>
+    </div>
+    <nav>
+      <button class="tab-btn active" onclick="showView('catalogue')">Catalogue</button>
+      <button class="tab-btn" onclick="showView('ajouter')">+ Ajouter un produit</button>
+    </nav>
+  </div>
+</header>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════ VUE CATALOGUE ═══════════ -->
+<div class="view active" id="view-catalogue">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Boutique en ligne</div>
+      <h1>Mon Catalogue Produits</h1>
+      <p id="hero-sub">Gérez, publiez et suivez tous vos produits en temps réel</p>
+    </div>
+  </div>
+  <div class="container">
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div>
+          <div class="stat-val" id="stat-total">0</div>
+          <div class="stat-label">Produits publiés</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏷️</div>
+        <div>
+          <div class="stat-val" id="stat-cats">0</div>
+          <div class="stat-label">Catégories</div>
+        </div>
+      </div>
+      <div class="stat-card" style="border-top-color: var(--orange)">
+        <div class="stat-icon" style="background:#fff3e8">💰</div>
+        <div>
+          <div class="stat-val" id="stat-val" style="color:var(--orange)">0</div>
+          <div class="stat-label">Valeur stock (DA)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Rechercher un produit..." oninput="render()">
+      </div>
+      <div class="filter-chips" id="chips"></div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="section-head">
+      <h2>Mes Produits</h2>
+      <div class="section-line"></div>
+      <span class="section-badge" id="count-badge">0 produit</span>
+    </div>
+
+    <!-- GRID -->
+    <div class="products-grid" id="grid"></div>
+
+  </div>
+</div>
+
+<!-- ═══════════ VUE FORMULAIRE ═══════════ -->
+<div class="view" id="view-ajouter">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Publication</div>
+      <h1>Publier un Nouveau Produit</h1>
+      <p>Remplissez le formulaire ci-dessous pour mettre votre produit en ligne</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section-head">
+      <h2>Informations du produit</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="form-layout">
+      <!-- FORMULAIRE -->
+      <div class="form-panel">
+        <div class="form-grid">
+
+          <div class="form-group full">
+            <label>Photo du produit</label>
+            <div class="upload-zone" onclick="document.getElementById('img-input').click()">
+              <input type="file" id="img-input" accept="image/*" onchange="previewImg(this)">
+              <div class="upload-icon">📷</div>
+              <p>Cliquez pour uploader une photo</p>
+              <span>JPG · PNG · WEBP · max 5 Mo</span>
+              <img id="preview-img" src="" alt="">
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label>Nom du produit *</label>
+            <input type="text" id="f-nom" placeholder="Ex : Robe d'été fleurie" maxlength="80">
+          </div>
+
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="f-desc" placeholder="Décrivez votre produit : matière, couleur, taille disponible..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Prix (DA) *</label>
+            <input type="number" id="f-prix" placeholder="0" min="0">
+          </div>
+
+          <div class="form-group">
+            <label>Quantité en stock</label>
+            <input type="number" id="f-stock" value="1" min="0">
+          </div>
+
+          <div class="form-group">
+            <label>Catégorie</label>
+            <select id="f-cat">
+              <option>Général</option>
+              <option>Vêtements</option>
+              <option>Chaussures</option>
+              <option>Accessoires</option>
+              <option>Électronique</option>
+              <option>Maison &amp; Déco</option>
+              <option>Alimentation</option>
+              <option>Beauté</option>
+              <option>Sport</option>
+              <option>Autre</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Catégorie personnalisée</label>
+            <input type="text" id="f-cat-custom" placeholder="Ou créez la vôtre...">
+          </div>
+
+        </div>
+        <button class="btn-primary" onclick="publier()">➤ Publier le produit</button>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-head">Conseils pour mieux vendre</div>
+          <div class="sidebar-body">
+            <ul>
+              <li>Ajoutez une photo de qualité, bien éclairée</li>
+              <li>Rédigez un titre court et descriptif</li>
+              <li>Précisez la matière, taille et couleur</li>
+              <li>Fixez un prix compétitif et juste</li>
+              <li>Mettez à jour votre stock régulièrement</li>
+              <li>Créez des catégories pour mieux organiser</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-head">Catégories populaires</div>
+          <div class="sidebar-body">
+            <ul>
+              <li>Vêtements &amp; Mode</li>
+              <li>Électronique &amp; High-tech</li>
+              <li>Maison &amp; Décoration</li>
+              <li>Beauté &amp; Bien-être</li>
+              <li>Sport &amp; Loisirs</li>
+              <li>Alimentation &amp; Épicerie</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sidebar-highlight">
+          <p>Vos données sont sauvegardées automatiquement</p>
+          <strong>🔒 Stockage local sécurisé</strong>
+          <button class="btn-primary" style="margin-top:0;background:var(--orange)" onclick="showView('catalogue')">Voir mon catalogue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 <span>MaBoutique</span> — Tous droits réservés — Algérie
+</footer>
+
+<script>
+var produits = JSON.parse(localStorage.getItem('mb_prods') || '[]');
+var filtre = 'tous';
+
+function save(){ localStorage.setItem('mb_prods', JSON.stringify(produits)); }
+
+function showView(v){
+  document.querySelectorAll('.view').forEach(function(el){ el.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
+  document.getElementById('view-'+v).classList.add('active');
+  document.querySelectorAll('.tab-btn')[v==='catalogue'?0:1].classList.add('active');
+  if(v==='catalogue') render();
+}
+
+function previewImg(input){
+  var file = input.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = document.getElementById('preview-img');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+function publier(){
+  var nom = document.getElementById('f-nom').value.trim();
+  var prix = parseFloat(document.getElementById('f-prix').value);
+  var desc = document.getElementById('f-desc').value.trim();
+  var stock = parseInt(document.getElementById('f-stock').value)||0;
+  var catS = document.getElementById('f-cat').value;
+  var catC = document.getElementById('f-cat-custom').value.trim();
+  var cat = catC || catS;
+  var imgEl = document.getElementById('preview-img');
+  var img = imgEl.src && imgEl.src.startsWith('data:') ? imgEl.src : null;
+
+  if(!nom){ toast('⚠ Saisissez un nom de produit'); return; }
+  if(isNaN(prix)||prix<0){ toast('⚠ Saisissez un prix valide'); return; }
+
+  produits.unshift({ id: Date.now(), nom:nom, prix:prix, desc:desc, stock:stock, cat:cat, img:img });
+  save();
+  document.getElementById('f-nom').value='';
+  document.getElementById('f-desc').value='';
+  document.getElementById('f-prix').value='';
+  document.getElementById('f-stock').value='1';
+  document.getElementById('f-cat').value='Général';
+  document.getElementById('f-cat-custom').value='';
+  imgEl.style.display='none';
+  document.getElementById('img-input').value='';
+  toast('✓ Produit publié avec succès !');
+  showView('catalogue');
+}
+
+function supprimer(id){
+  produits = produits.filter(function(p){ return p.id!==id; });
+  save(); render();
+  toast('Produit supprimé');
+}
+
+function setFiltre(cat, el){
+  filtre = cat;
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('active'); });
+  el.classList.add('active');
+  render();
+}
+
+var emojis = {'Vêtements':'👗','Chaussures':'👟','Accessoires':'👜','Électronique':'📱','Maison & Déco':'🏠','Alimentation':'🥘','Beauté':'💄','Sport':'⚽'};
+function ico(cat){ return emojis[cat]||'📦'; }
+
+function badgeS(s){
+  if(s===0) return '<span class="badge badge-out">Rupture</span>';
+  if(s<=3) return '<span class="badge badge-low">Stock faible ('+s+')</span>';
+  return '<span class="badge badge-ok">En stock ('+s+')</span>';
+}
+
+function render(){
+  var q = document.getElementById('search-input').value.toLowerCase();
+  var list = produits.filter(function(p){
+    var m = p.nom.toLowerCase().includes(q)||(p.desc||'').toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
+    return m && (filtre==='tous'||p.cat===filtre);
+  });
+
+  // stats
+  document.getElementById('stat-total').textContent = produits.length;
+  document.getElementById('stat-cats').textContent = [...new Set(produits.map(function(p){return p.cat;}))].length;
+  document.getElementById('stat-val').textContent = produits.reduce(function(s,p){return s+p.prix*p.stock;},0).toLocaleString('fr-DZ');
+  document.getElementById('hero-sub').textContent = produits.length+' produit'+(produits.length>1?'s':'')+' dans votre boutique';
+  document.getElementById('count-badge').textContent = list.length+' produit'+(list.length>1?'s':'');
+
+  // chips
+  var cats = [...new Set(produits.map(function(p){return p.cat;}))];
+  var c = '<span class="chip '+(filtre==='tous'?'active':'')+'" onclick="setFiltre(\'tous\',this)">Tous ('+produits.length+')</span>';
+  cats.forEach(function(cat){
+    var n = produits.filter(function(p){return p.cat===cat;}).length;
+    c += '<span class="chip '+(filtre===cat?'active':'')+'" onclick="setFiltre(\''+cat.replace(/'/g,"\\'")+'\''+',this)">'+ico(cat)+' '+cat+' ('+n+')</span>';
+  });
+  document.getElementById('chips').innerHTML = c;
+
+  // grid
+  var grid = document.getElementById('grid');
+  if(list.length===0){
+    var msg = produits.length===0 ? 'Publiez votre premier produit pour démarrer' : 'Aucun produit ne correspond à votre recherche';
+    var btn = produits.length===0 ? '<button class="btn-primary" style="width:auto;margin-top:0" onclick="showView(\'ajouter\')">Publier un produit</button>' : '';
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">'+(produits.length===0?'🛍️':'🔍')+'</div><h3>'+(produits.length===0?'Catalogue vide':'Aucun résultat')+'</h3><p>'+msg+'</p>'+btn+'</div>';
+  } else {
+    grid.innerHTML = list.map(function(p){
+      return '<div class="product-card">'+
+        '<div class="prod-img">'+(p.img?'<img src="'+p.img+'" alt="'+p.nom+'">':ico(p.cat))+'<div class="prod-img-bar"></div></div>'+
+        '<div class="prod-body">'+
+          '<div class="prod-cat">'+p.cat+'</div>'+
+          '<div class="prod-name">'+p.nom+'</div>'+
+          (p.desc?'<div class="prod-desc">'+p.desc+'</div>':'')+
+          '<div class="prod-footer">'+
+            '<div class="prod-price">'+p.prix.toLocaleString('fr-DZ')+' <small>DA</small></div>'+
+            '<div class="prod-actions">'+badgeS(p.stock)+'<button class="btn-del" onclick="supprimer('+p.id+')">Supprimer</button></div>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
+}
+
+render();
+</script>
+</body>
+</html>
